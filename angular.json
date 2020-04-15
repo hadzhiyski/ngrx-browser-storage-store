@@ -42,6 +42,130 @@
           }
         }
       }
+    },
+    "ngrx-storage-store-demo": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "projects/ngrx-storage-store-demo",
+      "sourceRoot": "projects/ngrx-storage-store-demo/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ngrx-storage-store-demo",
+            "index": "projects/ngrx-storage-store-demo/src/index.html",
+            "main": "projects/ngrx-storage-store-demo/src/main.ts",
+            "polyfills": "projects/ngrx-storage-store-demo/src/polyfills.ts",
+            "tsConfig": "projects/ngrx-storage-store-demo/tsconfig.app.json",
+            "aot": true,
+            "assets": [
+              "projects/ngrx-storage-store-demo/src/favicon.ico",
+              "projects/ngrx-storage-store-demo/src/assets"
+            ],
+            "styles": [
+              "projects/ngrx-storage-store-demo/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/ngrx-storage-store-demo/src/environments/environment.ts",
+                  "with": "projects/ngrx-storage-store-demo/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ngrx-storage-store-demo:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ngrx-storage-store-demo:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ngrx-storage-store-demo:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/ngrx-storage-store-demo/src/test.ts",
+            "polyfills": "projects/ngrx-storage-store-demo/src/polyfills.ts",
+            "tsConfig": "projects/ngrx-storage-store-demo/tsconfig.spec.json",
+            "karmaConfig": "projects/ngrx-storage-store-demo/karma.conf.js",
+            "assets": [
+              "projects/ngrx-storage-store-demo/src/favicon.ico",
+              "projects/ngrx-storage-store-demo/src/assets"
+            ],
+            "styles": [
+              "projects/ngrx-storage-store-demo/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/ngrx-storage-store-demo/tsconfig.app.json",
+              "projects/ngrx-storage-store-demo/tsconfig.spec.json",
+              "projects/ngrx-storage-store-demo/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/ngrx-storage-store-demo/e2e/protractor.conf.js",
+            "devServerTarget": "ngrx-storage-store-demo:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ngrx-storage-store-demo:serve:production"
+            }
+          }
+        }
+      }
     }},
-  "defaultProject": "ngrx-storage-store"
+  "defaultProject": "ngrx-storage-store",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }

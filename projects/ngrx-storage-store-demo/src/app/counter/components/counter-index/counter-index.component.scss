@@ -1,0 +1,23 @@
+:host {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3em;
+}
+
+.counter-card {
+  width: 300px;
+  &-title {
+    text-align: center;
+  }
+  &-container {
+    display: flex;
+    justify-content: center;
+  }
+
+  .mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
+  }
+}

@@ -1,5 +1,5 @@
 {
-  "name": "ngrx-storage-store",
+  "name": "ngrx-browser-storage-store",
   "version": "0.0.0",
   "scripts": {
     "ng": "ng",

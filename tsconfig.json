@@ -16,9 +16,9 @@
       "dom"
     ],
     "paths": {
-      "ngrx-storage-store": [
-        "dist/ngrx-storage-store/ngrx-storage-store",
-        "dist/ngrx-storage-store"
+      "ngrx-browser-storage-store": [
+        "dist/ngrx-browser-storage-store/ngrx-browser-storage-store",
+        "dist/ngrx-browser-storage-store"
       ]
     }
   },

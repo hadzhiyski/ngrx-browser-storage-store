@@ -1,0 +1,22 @@
+{
+  "name": "ngrx-browser-storage-store",
+  "description": "Persist ngrx state to localStorage / sessionStrage",
+  "version": "0.0.0",
+  "license": "Apache-2.0",
+  "repository": {
+    "url": "https://github.com/hadzhiyski/ngrx-browser-storage-store.git"
+  },
+  "author": {
+    "name": "Vladislav Hadzhiyski",
+    "email": "vladislav.hadzhiyski@gmail.com",
+    "url": "https://github.com/hadzhiyski"
+  },
+  "peerDependencies": {
+    "@angular/common": "^9.1.1",
+    "@angular/core": "^9.1.1",
+    "@ngrx/store": "^9.1.0",
+    "@ngrx/effects": "^9.1.0",
+    "rxjs": "~6.5.4",
+    "tslib": "^1.10.0"
+  }
+}

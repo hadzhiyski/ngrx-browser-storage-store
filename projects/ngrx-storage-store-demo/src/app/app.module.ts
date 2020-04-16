@@ -10,7 +10,7 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { APP_PREFIX } from 'ngrx-storage-store';
+import { NSS_STORAGE_OPTIONS, BrowserStorage } from 'ngrx-storage-store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -34,8 +34,11 @@ import { APP_PREFIX } from 'ngrx-storage-store';
   ],
   providers: [
     {
-      provide: APP_PREFIX,
-      useValue: 'ngrx-storage-store-demo'
+      provide: NSS_STORAGE_OPTIONS,
+      useValue: {
+        appPrefix: 'ngrx-storage-store',
+        storage: BrowserStorage.LocalStorage
+      }
     }
   ],
   bootstrap: [AppComponent],

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions } from '@ngrx/effects';
-import { LocalStorageEffects } from 'ngrx-storage-store';
+import { BrowserStorageEffects } from 'ngrx-storage-store';
 import { ITodoState, todoFeatureKey } from '../reducers/todo.reducer';
 import { selectTodoState } from '../selectors/todo.selectors';
 
 @Injectable()
 export class TodoEffects {
-  saveToLocalStorage$ = this.localStorageEffects.saveForFeature(
+  saveToLocalStorage$ = this.browserStorageEffects.saveForFeature(
     this.actions$,
     todoFeatureKey,
     selectTodoState
@@ -14,6 +14,6 @@ export class TodoEffects {
 
   constructor(
     private actions$: Actions,
-    private localStorageEffects: LocalStorageEffects<ITodoState>
+    private browserStorageEffects: BrowserStorageEffects<ITodoState>
   ) {}
 }

@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
 import { Actions } from '@ngrx/effects';
-import { LocalStorageEffects } from 'ngrx-storage-store';
+import { BrowserStorageEffects } from 'ngrx-storage-store';
 import { counterFeatureKey, ICounterState } from '../reducers/counter.reducer';
 import { selectCounterState } from '../selectors/counter.selectors';
 
 @Injectable()
 export class CounterEffects {
-  saveToLocalStorage$ = this.localStorageEffects.saveForFeature(
+  saveToLocalStorage$ = this.browserStorageEffects.saveForFeature(
     this.actions$,
     counterFeatureKey,
     selectCounterState
@@ -14,6 +14,6 @@ export class CounterEffects {
 
   constructor(
     private actions$: Actions,
-    private localStorageEffects: LocalStorageEffects<ICounterState>
+    private browserStorageEffects: BrowserStorageEffects<ICounterState>
   ) {}
 }

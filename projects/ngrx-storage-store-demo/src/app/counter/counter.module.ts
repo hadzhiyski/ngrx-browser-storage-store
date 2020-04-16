@@ -5,7 +5,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatIconModule } from '@angular/material/icon';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreModule } from '@ngrx/store';
-import { StateLocalStorageLoader } from 'ngrx-storage-store';
+import { BrowserStorage, BrowserStorageNgrxModule } from 'ngrx-storage-store';
 import { CounterIndexComponent } from './components/counter-index/counter-index.component';
 import { CounterRoutingModule } from './counter-routing.module';
 import { CounterEffects } from './store/effects/counter.effects';
@@ -21,11 +21,14 @@ import * as fromCounter from './store/reducers/counter.reducer';
     MatIconModule,
 
     CounterRoutingModule,
+    BrowserStorageNgrxModule.forFeature(fromCounter.counterFeatureKey, {
+      storage: BrowserStorage.SessionStorage,
+    }),
     StoreModule.forFeature(fromCounter.counterFeatureKey, fromCounter.reducer, {
       metaReducers: [
-        StateLocalStorageLoader.forFeature<fromCounter.ICounterState>(
-          fromCounter.counterFeatureKey
-        ),
+        BrowserStorageNgrxModule.metaReducerInjector.forFeature<
+          fromCounter.ICounterState
+        >(fromCounter.counterFeatureKey),
       ],
     }),
     EffectsModule.forFeature([CounterEffects]),

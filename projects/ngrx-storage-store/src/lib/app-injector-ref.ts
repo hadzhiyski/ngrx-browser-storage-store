@@ -8,16 +8,21 @@ import {
 } from '@angular/core';
 
 export class AppInjectorRef {
-  private static injector: Injector;
+  private static injector: Injector | undefined = undefined;
+  private static initialized = false;
+
+  static isInitialized(): boolean {
+    return AppInjectorRef.initialized;
+  }
 
   static set(injector: Injector) {
     AppInjectorRef.injector = injector;
+    AppInjectorRef.initialized = true;
   }
 
-  static withProviders(providers: StaticProvider[]) {
+  static withDefaultProviders(providers: StaticProvider[]) {
     const injector = Injector.create({
       providers,
-      parent: AppInjectorRef.injector,
       name: 'ngrx-storage-store-injector'
     });
 

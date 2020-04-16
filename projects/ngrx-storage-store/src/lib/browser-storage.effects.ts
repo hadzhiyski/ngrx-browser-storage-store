@@ -9,14 +9,12 @@ import {
 } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap, withLatestFrom } from 'rxjs/operators';
-import { LocalStorageService } from './local-storage.service';
+import { BrowserStorageCache } from './browser-storage-cache';
 
-@Injectable({
-  providedIn: 'root',
-})
-export class LocalStorageEffects<TState> {
+@Injectable()
+export class BrowserStorageEffects<TState> {
   constructor(
-    private localStorageService: LocalStorageService,
+    private cache: BrowserStorageCache,
     private store: Store<TState>
   ) {}
 
@@ -29,13 +27,13 @@ export class LocalStorageEffects<TState> {
       DefaultProjectorFn<TState>
     >
   ): Observable<[Action, TState]> & CreateEffectMetadata {
+    const storageService = this.cache.get(featureName);
+
     return createEffect(
       () =>
         actions$.pipe(
           withLatestFrom(this.store.pipe(select(featureSelector))),
-          tap(([action, state]) =>
-            this.localStorageService.set(featureName, state)
-          )
+          tap(([action, state]) => storageService.set(featureName, state))
         ),
       { dispatch: false }
     );
@@ -44,13 +42,13 @@ export class LocalStorageEffects<TState> {
   saveForRoot(
     actions$: Actions
   ): Observable<[Action, TState]> & CreateEffectMetadata {
+    const storageService = this.cache.getRoot();
+
     return createEffect(
       () =>
         actions$.pipe(
           withLatestFrom(this.store),
-          tap(([action, state]) =>
-            this.localStorageService.set(undefined, state)
-          )
+          tap(([action, state]) => storageService.set(undefined, state))
         ),
       { dispatch: false }
     );

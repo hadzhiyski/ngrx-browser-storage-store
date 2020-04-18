@@ -1,0 +1,20 @@
+@import '~@angular/material/theming';
+
+@import './reset';
+
+@include mat-core();
+
+$app-primary: mat-palette($mat-indigo);
+$app-accent: mat-palette($mat-pink, A200, A100, A400);
+$app-warn: mat-palette($mat-red);
+
+$app-theme: mat-light-theme($app-primary, $app-accent, $app-warn);
+
+@import '../app/app.component.theme.scss';
+
+@mixin custom-components-theme($theme) {
+  @include app-component-theme($theme);
+}
+
+@include angular-material-theme($app-theme);
+@include custom-components-theme($app-theme);

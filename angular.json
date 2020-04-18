@@ -68,7 +68,7 @@
               "projects/ngrx-browser-storage-store-demo/src/assets"
             ],
             "styles": [
-              "projects/ngrx-browser-storage-store-demo/src/styles.scss"
+              "projects/ngrx-browser-storage-store-demo/src/styles/styles.scss"
             ],
             "scripts": []
           },
@@ -132,7 +132,7 @@
               "projects/ngrx-browser-storage-store-demo/src/assets"
             ],
             "styles": [
-              "projects/ngrx-browser-storage-store-demo/src/styles.scss"
+              "projects/ngrx-browser-storage-store-demo/src/styles/styles.scss"
             ],
             "scripts": []
           }

@@ -1,11 +1,33 @@
-<header>
-  <mat-toolbar color="primary">
-    <h1 class="title" [routerLink]="'/'">ngrx-browser-storage-store demo</h1>
-    <span class="menu-spacer"></span>
-    <div>
-      <a mat-button [routerLink]="'/counter'">Counter</a>
-      <a mat-button [routerLink]="'/todo'">Todo</a>
+<mat-sidenav-container class="sidenav-container">
+  <mat-sidenav
+    #drawer
+    class="sidenav"
+    fixedInViewport
+    [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
+    [mode]="(isHandset$ | async) ? 'over' : 'push'"
+  >
+    <mat-toolbar>Menu</mat-toolbar>
+    <mat-nav-list>
+      <a mat-list-item [routerLink]="'/docs'" routerLinkActive="active">Docs</a>
+      <mat-divider></mat-divider>
+      <a mat-list-item [routerLink]="'/counter'" routerLinkActive="active">Counter</a>
+      <a mat-list-item [routerLink]="'/todo'" routerLinkActive="active">Todo</a>
+    </mat-nav-list>
+  </mat-sidenav>
+  <mat-sidenav-content>
+    <mat-toolbar color="primary">
+      <button
+        type="button"
+        aria-label="Toggle sidenav"
+        mat-icon-button
+        (click)="drawer.toggle()"
+      >
+        <mat-icon aria-label="Side nav toggle icon">menu</mat-icon>
+      </button>
+      <a class="title" [routerLink]="'/'">ngrx-browser-storage-store demo</a>
+    </mat-toolbar>
+    <div class="content">
+      <router-outlet></router-outlet>
     </div>
-  </mat-toolbar>
-</header>
-<router-outlet></router-outlet>
+  </mat-sidenav-content>
+</mat-sidenav-container>

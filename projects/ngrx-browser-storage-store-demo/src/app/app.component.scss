@@ -9,3 +9,34 @@ header .title:hover {
   -ms-user-select: none; /* IE 10+ and Edge */
   user-select: none; /* Standard syntax */
 }
+
+.sidenav-container {
+  height: 100%;
+
+  .sidenav {
+    width: 200px;
+
+    .mat-toolbar {
+      background: inherit;
+
+      &.mat-primary {
+        position: sticky;
+        top: 0;
+        z-index: 1;
+      }
+    }
+  }
+
+  .title {
+    word-break: break-all;
+    white-space: normal;
+    text-decoration: none;
+    cursor: pointer;
+    color: inherit;
+  }
+}
+
+.content {
+  width: 100%;
+  margin-top: 2em;
+}

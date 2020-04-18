@@ -1,5 +1,6 @@
 :host {
   width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -7,25 +8,14 @@
   justify-content: space-between;
 }
 
-.todos {
-  width: 100%;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  margin: 3em;
+.todo {
+  &.todo-handset {
+    width: 100%;
+  }
 
-  .todo {
-    width: 40%;
-    margin: 1em;
-
-    &.todo-handset {
-      width: 100%;
-    }
-
-    .mat-card-actions {
-      display: flex;
-      justify-content: flex-end;
-    }
+  .mat-card-actions {
+    display: flex;
+    justify-content: flex-end;
   }
 }
 
@@ -47,6 +37,7 @@
 
 .actions {
   width: 100%;
+  margin-top: 2em;
   display: flex;
   justify-content: center;
 }

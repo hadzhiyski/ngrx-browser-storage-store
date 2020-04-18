@@ -10,7 +10,6 @@ import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { environment } from '../environments/environment';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { NSS_STORAGE_OPTIONS, BrowserStorage } from 'ngrx-browser-storage-store';
 
 @NgModule({
   declarations: [AppComponent],
@@ -22,7 +21,7 @@ import { NSS_STORAGE_OPTIONS, BrowserStorage } from 'ngrx-browser-storage-store'
     MatListModule,
     MatToolbarModule,
 
-    StoreModule.forRoot({}, {}),
+    StoreModule.forRoot({}),
     EffectsModule.forRoot([]),
 
     AppRoutingModule,
@@ -31,15 +30,6 @@ import { NSS_STORAGE_OPTIONS, BrowserStorage } from 'ngrx-browser-storage-store'
       maxAge: 25,
       logOnly: environment.production,
     }),
-  ],
-  providers: [
-    {
-      provide: NSS_STORAGE_OPTIONS,
-      useValue: {
-        appPrefix: 'ngrx-browser-storage-store',
-        storage: BrowserStorage.LocalStorage
-      }
-    }
   ],
   bootstrap: [AppComponent],
 })

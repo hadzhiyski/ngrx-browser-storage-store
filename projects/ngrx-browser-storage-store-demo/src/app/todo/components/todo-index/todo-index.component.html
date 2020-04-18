@@ -1,1 +1,61 @@
-<p>todo-index works!</p>
+<ng-template #todos let-todos>
+  <div class="todos">
+    <mat-card
+      *ngFor="let todo of todos"
+      class="todo"
+    >
+      <mat-card-title class="todo-title">{{ todo.title }}</mat-card-title>
+      <mat-card-subtitle class="todo-description">
+        {{ todo.description }}
+      </mat-card-subtitle>
+      <mat-card-actions>
+        <button
+          mat-icon-button
+          class="text-green"
+          matTooltip="Mark as completed"
+        >
+          <span class="material-icons">done</span>
+        </button>
+        <button
+          mat-icon-button
+          class="text-red"
+          matTooltip="Delete"
+        >
+          <span class="material-icons">delete</span>
+        </button>
+      </mat-card-actions>
+    </mat-card>
+  </div>
+  <ng-container *ngTemplateOutlet="addbutton"></ng-container>
+</ng-template>
+
+<ng-template #empty>
+  <div class="empty-todo-list">
+    <div class="text-center">
+      <h1 class="title">Your todo list is empty</h1>
+    </div>
+    <ng-container *ngTemplateOutlet="addbutton"></ng-container>
+  </div>
+</ng-template>
+
+<ng-template #addbutton>
+  <div class="actions">
+    <button
+      mat-raised-button
+      color="accent"
+      (click)="openAddTodoDialog()"
+      matTooltip="Add Todo"
+    >
+      <mat-icon>add</mat-icon>
+      Add new todo
+    </button>
+  </div>
+</ng-template>
+
+<ng-container
+  *ngTemplateOutlet="
+    (todos$ | async)!.length == 0 ? empty : todos;
+    context: { $implicit: todos$ | async }
+  "
+>
+</ng-container>

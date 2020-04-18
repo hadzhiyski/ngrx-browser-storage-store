@@ -1,14 +1,12 @@
-import { ChangeDetectionStrategy, Component, OnDestroy } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
-import { select, Store } from '@ngrx/store';
-import { Observable, Subject, of } from 'rxjs';
-import { takeUntil } from 'rxjs/operators';
-import { LayoutService } from '../../../shared/layout.service';
+import { Store } from '@ngrx/store';
+import { Observable } from 'rxjs';
+import { addTodo } from '../../store/actions/todo.actions';
 import { ITodo } from '../../store/models/todo.interfaces';
 import { ITodoState } from '../../store/reducers/todo.reducer';
 import { selectAllTodos } from '../../store/selectors/todo.selectors';
 import { AddTodoComponent } from '../add-todo/add-todo.component';
-import { addTodo } from '../../store/actions/todo.actions';
 
 @Component({
   selector: 'app-todo-index',
@@ -17,13 +15,9 @@ import { addTodo } from '../../store/actions/todo.actions';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class TodoIndexComponent {
-
   todos$: Observable<ITodo[]>;
 
-  constructor(
-    private store: Store<ITodoState>,
-    private dialog: MatDialog
-  ) {
+  constructor(private store: Store<ITodoState>, private dialog: MatDialog) {
     this.todos$ = this.store.select(selectAllTodos);
   }
 

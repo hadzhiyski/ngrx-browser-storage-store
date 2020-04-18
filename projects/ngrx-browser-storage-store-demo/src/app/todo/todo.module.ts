@@ -5,9 +5,9 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatDialogModule } from '@angular/material/dialog';
-import { MatIconModule } from '@angular/material/icon';
 import { MatInputModule } from '@angular/material/input';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { EffectsModule } from '@ngrx/effects';
 import { StoreConfig, StoreModule } from '@ngrx/store';
 import {
@@ -44,16 +44,21 @@ export function getTodoFeatureConfig(
     MatCardModule,
     MatCheckboxModule,
     MatDialogModule,
-    MatIconModule,
     MatInputModule,
     MatTooltipModule,
+
+    FontAwesomeModule,
 
     TodoRoutingModule,
 
     BrowserStorageModule.forFeature(fromTodo.todoFeatureKey, {
       storage: BrowserStorage.LocalStorage,
     }),
-    StoreModule.forFeature<fromTodo.ITodoState>(fromTodo.todoFeatureKey, fromTodo.reducer, TODO_FEATURE_CONFIG),
+    StoreModule.forFeature<fromTodo.ITodoState>(
+      fromTodo.todoFeatureKey,
+      fromTodo.reducer,
+      TODO_FEATURE_CONFIG
+    ),
     EffectsModule.forFeature([TodoEffects]),
   ],
   providers: [

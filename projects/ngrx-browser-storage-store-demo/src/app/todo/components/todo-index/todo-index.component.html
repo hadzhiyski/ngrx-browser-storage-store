@@ -13,10 +13,10 @@
               class="text-green"
               matTooltip="Mark as completed"
             >
-              <span class="material-icons">done</span>
+              <fa-icon [icon]="['fas', 'check']"></fa-icon>
             </button>
             <button mat-icon-button class="text-red" matTooltip="Delete">
-              <span class="material-icons">delete</span>
+              <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
             </button>
           </mat-card-actions>
         </mat-card>
@@ -42,7 +42,7 @@
         (click)="openAddTodoDialog()"
         matTooltip="Add Todo"
       >
-        <mat-icon>add</mat-icon>
+        <fa-icon [icon]="['fas', 'plus']"></fa-icon>
         Add new todo
       </button>
     </div>

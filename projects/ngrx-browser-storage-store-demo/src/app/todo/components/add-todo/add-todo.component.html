@@ -25,7 +25,7 @@
         [disabled]="todoFormGroup.invalid"
         class="text-green"
       >
-        <mat-icon>done</mat-icon>
+        <fa-icon [icon]="['fas', 'check']"></fa-icon>
       </button>
       <button
         mat-icon-button
@@ -33,7 +33,7 @@
         (click)="dialogRef.close()"
         class="text-red"
       >
-        <mat-icon>close</mat-icon>
+        <fa-icon [icon]="['fas', 'times']"></fa-icon>
       </button>
     </mat-card-actions>
   </mat-card>

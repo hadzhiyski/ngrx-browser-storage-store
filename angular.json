@@ -161,10 +161,15 @@
               "devServerTarget": "ngrx-browser-storage-store-demo:serve:production"
             }
           }
+        },
+        "deploy": {
+          "builder": "angular-cli-ghpages:deploy",
+          "options": {}
         }
       }
-    }},
-  "defaultProject": "ngrx-browser-storage-store",
+    }
+  },
+  "defaultProject": "ngrx-browser-storage-store-demo",
   "cli": {
     "defaultCollection": "@ngrx/schematics"
   }

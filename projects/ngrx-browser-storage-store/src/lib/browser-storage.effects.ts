@@ -9,31 +9,28 @@ import {
 } from '@ngrx/store';
 import { Observable } from 'rxjs';
 import { tap, withLatestFrom } from 'rxjs/operators';
-import { BrowserStorageCache } from './browser-storage-cache';
+import { BrowserStorageService } from './browser-storage.service';
 
 @Injectable()
 export class BrowserStorageEffects<TState> {
   constructor(
-    private cache: BrowserStorageCache,
+    private browserStorageService: BrowserStorageService,
     private store: Store<TState>
   ) {}
 
   saveForFeature(
     actions$: Actions,
-    featureName: string,
     featureSelector: MemoizedSelector<
       TState,
       TState,
       DefaultProjectorFn<TState>
     >
   ): Observable<[Action, TState]> & CreateEffectMetadata {
-    const storageService = this.cache.get(featureName);
-
     return createEffect(
       () =>
         actions$.pipe(
           withLatestFrom(this.store.pipe(select(featureSelector))),
-          tap(([action, state]) => storageService.set(featureName, state))
+          tap(([action, state]) => this.browserStorageService.set(state))
         ),
       { dispatch: false }
     );
@@ -42,13 +39,11 @@ export class BrowserStorageEffects<TState> {
   saveForRoot(
     actions$: Actions
   ): Observable<[Action, TState]> & CreateEffectMetadata {
-    const storageService = this.cache.getRoot();
-
     return createEffect(
       () =>
         actions$.pipe(
           withLatestFrom(this.store),
-          tap(([action, state]) => storageService.set(undefined, state))
+          tap(([action, state]) => this.browserStorageService.set(state))
         ),
       { dispatch: false }
     );

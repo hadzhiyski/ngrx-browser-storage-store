@@ -1,37 +1,26 @@
+import { Inject, Injectable } from '@angular/core';
 import {
   BrowserStorage,
-  IBrowserStorageOptions,
-  NSS_DEFAULT_STORAGE_OPTIONS,
-} from './browser-storage-options';
+  NBSS_DEFAULT_BROWSER_STORAGE,
+} from './browser-storage.config';
+import { Optional } from './helpers';
+import { _NBSS_BROWSER_STORAGE, _NBSS_FEATURE_NAME } from './tokens';
 
-const STATE_PREFIX = 'state';
+const STATE_PREFIX = 'app-state';
 
+@Injectable()
 export class BrowserStorageService {
   private storage: Storage;
-  private options: IBrowserStorageOptions;
 
-  private constructor(
-    options: IBrowserStorageOptions,
-    globalOptions: IBrowserStorageOptions
+  constructor(
+    @Inject(_NBSS_BROWSER_STORAGE) storage: Optional<BrowserStorage>,
+    @Inject(_NBSS_FEATURE_NAME) private feature: Optional<string>
   ) {
-    this.options = Object.assign(
-      {},
-      NSS_DEFAULT_STORAGE_OPTIONS,
-      globalOptions,
-      options
-    );
-    this.storage = this.getStorage();
+    this.storage = this.getStorage(storage);
   }
 
-  static create(
-    options: IBrowserStorageOptions,
-    globalOptions: IBrowserStorageOptions
-  ): BrowserStorageService {
-    return new BrowserStorageService(options, globalOptions);
-  }
-
-  loadInitialState(feature?: string): any {
-    const key = this.getStorageKey(feature, this.options.appPrefix);
+  loadInitialState(): any {
+    const key = this.getStorageKey(this.feature);
     const item = this.storage.getItem(key);
     if (item) {
       return JSON.parse(item);
@@ -40,31 +29,26 @@ export class BrowserStorageService {
     return {};
   }
 
-  set(feature: string | undefined, value: any) {
-    const key = this.getStorageKey(feature, this.options.appPrefix);
+  set(value: any) {
+    const key = this.getStorageKey(this.feature);
     this.storage.setItem(key, JSON.stringify(value));
   }
 
-  private getStorageKey(
-    feature: string | undefined,
-    appPrefix: string
-  ): string {
-    let key = `${appPrefix}-${STATE_PREFIX}`;
+  private getStorageKey(feature: Optional<string>): string {
     if (feature) {
-      key = `${key}-${feature}`;
+      return `${STATE_PREFIX}-${feature}`;
     }
 
-    return key;
+    return STATE_PREFIX;
   }
 
-  private getStorage(): Storage {
-    switch (this.options.storage) {
-      case BrowserStorage.LocalStorage:
-        return localStorage;
+  private getStorage(configStorage: Optional<BrowserStorage>): Storage {
+    const cfgStorage = configStorage || NBSS_DEFAULT_BROWSER_STORAGE;
+    switch (cfgStorage) {
       case BrowserStorage.SessionStorage:
         return sessionStorage;
-      default:
-        throw new Error(`Not supported storage '${this.options.storage}'`);
+      case BrowserStorage.LocalStorage:
+        return localStorage;
     }
   }
 }

@@ -1,13 +1,15 @@
 {
   "extends": "../../tsconfig.json",
   "compilerOptions": {
+    "allowJs": false,
+    "strict": true,
     "outDir": "../../out-tsc/lib",
     "target": "es2015",
     "declaration": true,
     "inlineSources": true,
     "types": [],
     "lib": [
-      "dom",
+      "DOM",
       "es2018"
     ]
   },

@@ -1,44 +1,38 @@
 import { ModuleWithProviders, NgModule } from '@angular/core';
-import { AppInjectorRef } from './app-injector-ref';
-import { BrowserStorageCache } from './browser-storage-cache';
+import { BrowserStorageMetaReducerLoader } from './browser-storage-meta-reducer-loader';
 import {
-  IBrowserStorageOptions,
-  NSS_DEFAULT_STORAGE_OPTIONS,
-  NSS_STORAGE_OPTIONS,
-} from './browser-storage-options';
+  BrowserStorageConfig,
+  NBSS_DEFAULT_BROWSER_STORAGE,
+} from './browser-storage.config';
 import { BrowserStorageEffects } from './browser-storage.effects';
 import { BrowserStorageService } from './browser-storage.service';
-import { MetaReducerInjector } from './meta-reducer-injector';
+import { _NBSS_BROWSER_STORAGE, _NBSS_FEATURE_NAME } from './tokens';
 
-@NgModule({
-  providers: [
-    BrowserStorageEffects,
-    {
-      provide: NSS_STORAGE_OPTIONS,
-      useValue: NSS_DEFAULT_STORAGE_OPTIONS,
-    },
-  ],
-})
-export class BrowserStorageNgrxModule {
-  static readonly metaReducerInjector = new MetaReducerInjector();
+@NgModule({})
+export class BrowserStorageRootModule {}
 
+@NgModule({})
+export class BrowserStorageFeatureModule {}
+
+@NgModule({})
+export class BrowserStorageModule {
   static forRoot(
-    options?: IBrowserStorageOptions
-  ): ModuleWithProviders<BrowserStorageNgrxModule> {
-    BrowserStorageNgrxModule.init(options || NSS_DEFAULT_STORAGE_OPTIONS);
-
-    const cache = AppInjectorRef.get(BrowserStorageCache);
-    const globalOptions = AppInjectorRef.get(NSS_STORAGE_OPTIONS);
-    const service = BrowserStorageService.create(options, globalOptions);
-    cache.setRoot(service);
-
+    options?: BrowserStorageConfig
+  ): ModuleWithProviders<BrowserStorageRootModule> {
     return {
-      ngModule: BrowserStorageNgrxModule,
+      ngModule: BrowserStorageRootModule,
       providers: [
         BrowserStorageEffects,
+        BrowserStorageMetaReducerLoader,
+        BrowserStorageService,
         {
-          provide: NSS_STORAGE_OPTIONS,
-          useValue: options || NSS_DEFAULT_STORAGE_OPTIONS,
+          provide: _NBSS_BROWSER_STORAGE,
+          useValue:
+            (options && options.storage) || NBSS_DEFAULT_BROWSER_STORAGE,
+        },
+        {
+          provide: _NBSS_FEATURE_NAME,
+          useValue: undefined,
         },
       ],
     };
@@ -46,34 +40,24 @@ export class BrowserStorageNgrxModule {
 
   static forFeature(
     feature: string,
-    options?: IBrowserStorageOptions
-  ): ModuleWithProviders<BrowserStorageNgrxModule> {
-    BrowserStorageNgrxModule.init(options || NSS_DEFAULT_STORAGE_OPTIONS);
-
-    const cache = AppInjectorRef.get(BrowserStorageCache);
-    const globalOptions = AppInjectorRef.get(NSS_STORAGE_OPTIONS);
-    const service = BrowserStorageService.create(options, globalOptions);
-    cache.set(feature, service);
-
+    options?: BrowserStorageConfig
+  ): ModuleWithProviders<BrowserStorageFeatureModule> {
     return {
-      ngModule: BrowserStorageNgrxModule,
+      ngModule: BrowserStorageFeatureModule,
       providers: [
         BrowserStorageEffects,
+        BrowserStorageMetaReducerLoader,
+        BrowserStorageService,
         {
-          provide: NSS_STORAGE_OPTIONS,
-          useValue: options || NSS_DEFAULT_STORAGE_OPTIONS,
+          provide: _NBSS_BROWSER_STORAGE,
+          useValue:
+            (options && options.storage) || NBSS_DEFAULT_BROWSER_STORAGE,
+        },
+        {
+          provide: _NBSS_FEATURE_NAME,
+          useValue: feature,
         },
       ],
     };
-  }
-
-  private static init(options: IBrowserStorageOptions): void {
-    if (!AppInjectorRef.isInitialized()) {
-      const providers = [
-        { provide: BrowserStorageCache },
-        { provide: NSS_STORAGE_OPTIONS, useValue: options },
-      ];
-      AppInjectorRef.withDefaultProviders(providers);
-    }
   }
 }

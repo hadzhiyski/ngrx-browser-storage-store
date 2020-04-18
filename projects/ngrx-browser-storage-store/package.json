@@ -1,7 +1,7 @@
 {
   "name": "ngrx-browser-storage-store",
   "description": "Persist ngrx state to localStorage / sessionStrage",
-  "version": "0.1.0",
+  "version": "0.0.0",
   "license": "Apache-2.0",
   "repository": {
     "url": "https://github.com/hadzhiyski/ngrx-browser-storage-store.git"

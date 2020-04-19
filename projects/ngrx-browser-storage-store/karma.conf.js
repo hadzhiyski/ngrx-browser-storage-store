@@ -18,7 +18,9 @@ module.exports = function (config) {
     coverageIstanbulReporter: {
       dir: require('path').join(__dirname, '../../coverage/ngrx-browser-storage-store'),
       reports: ['html', 'lcovonly', 'text-summary'],
-      fixWebpackSourcePaths: true
+      fixWebpackSourcePaths: true,
+      // Omit files with no statements, no functions and no branches from the report
+      skipFilesWithNoCoverage: false,
     },
     reporters: ['progress', 'kjhtml'],
     port: 9876,

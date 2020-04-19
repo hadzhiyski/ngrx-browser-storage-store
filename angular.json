@@ -24,6 +24,7 @@
         "test": {
           "builder": "@angular-devkit/build-angular:karma",
           "options": {
+            "codeCoverage": true,
             "main": "projects/ngrx-browser-storage-store/src/test.ts",
             "tsConfig": "projects/ngrx-browser-storage-store/tsconfig.spec.json",
             "karmaConfig": "projects/ngrx-browser-storage-store/karma.conf.js"

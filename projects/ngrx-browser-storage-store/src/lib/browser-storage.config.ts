@@ -1,6 +1,6 @@
 export enum BrowserStorage {
-  LocalStorage,
-  SessionStorage,
+  LocalStorage = 'LocalStorage',
+  SessionStorage = 'SessionStorage',
 }
 
 export const NBSS_DEFAULT_BROWSER_STORAGE = BrowserStorage.LocalStorage;

@@ -12,7 +12,7 @@ const STATE_PREFIX = 'app-state';
 export class BrowserStorageService {
   private storage: Storage;
 
-  initialStateLoaded: boolean;
+  initialStateLoaded = false;
 
   constructor(
     @Inject(_NBSS_BROWSER_STORAGE) storage: Optional<BrowserStorage>,
@@ -33,6 +33,9 @@ export class BrowserStorageService {
   }
 
   set(value: any) {
+    if (!value) {
+      throw new Error('Value can not be falsy.');
+    }
     const key = this.getStorageKey(this.feature);
     this.storage.setItem(key, JSON.stringify(value));
   }

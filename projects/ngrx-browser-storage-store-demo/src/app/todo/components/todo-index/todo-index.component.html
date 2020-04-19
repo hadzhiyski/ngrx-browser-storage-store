@@ -1,8 +1,11 @@
 <div class="container">
   <ng-template #todos let-todos>
     <div class="row">
-      <div *ngFor="let todo of todos" class="col-sm-12 col-md-6 col-lg-3">
-        <mat-card class="todo">
+      <div
+        *ngFor="let todo of todos"
+        class="col-sm-12 col-md-6 col-lg-3 todo-wrapper"
+      >
+        <mat-card [ngClass]="{ completed: todo.completed }">
           <mat-card-title class="todo-title">{{ todo.title }}</mat-card-title>
           <mat-card-subtitle class="todo-description">
             {{ todo.description }}
@@ -11,11 +14,23 @@
             <button
               mat-icon-button
               class="text-green"
-              matTooltip="Mark as completed"
+              [matTooltip]="
+                !todo.completed ? 'Mark as completed' : 'Mark as incomplete'
+              "
+              (click)="toggleTodoCompleted(todo.id, todo.completed)"
             >
-              <fa-icon [icon]="['fas', 'check']"></fa-icon>
+              <fa-icon
+                [icon]="
+                  todo.completed ? ['fas', 'check-double'] : ['fas', 'check']
+                "
+              ></fa-icon>
             </button>
-            <button mat-icon-button class="text-red" matTooltip="Delete">
+            <button
+              mat-icon-button
+              class="text-red"
+              matTooltip="Delete"
+              (click)="deleteTodo(todo.id)"
+            >
               <fa-icon [icon]="['far', 'trash-alt']"></fa-icon>
             </button>
           </mat-card-actions>

@@ -8,9 +8,11 @@
   justify-content: space-between;
 }
 
-.todo {
-  &.todo-handset {
-    width: 100%;
+.todo-wrapper {
+  margin-bottom: 1.5em;
+
+  .completed .todo-title {
+    text-decoration: line-through;
   }
 
   .mat-card-actions {
@@ -37,7 +39,6 @@
 
 .actions {
   width: 100%;
-  margin-top: 2em;
   display: flex;
   justify-content: center;
 }

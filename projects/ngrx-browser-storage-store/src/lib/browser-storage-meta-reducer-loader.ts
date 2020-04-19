@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Action, ActionReducer, INIT, MetaReducer, UPDATE } from '@ngrx/store';
+import { Action, ActionReducer, MetaReducer, UPDATE } from '@ngrx/store';
 import { BrowserStorageService } from './browser-storage.service';
 
 @Injectable()
@@ -9,14 +9,17 @@ export class BrowserStorageMetaReducerLoader {
   get<TState>(): MetaReducer<TState, Action> {
     return (reducer: ActionReducer<TState>): ActionReducer<TState> => {
       return (state, action) => {
-        const newState = reducer(state, action);
-        if ([INIT.toString(), UPDATE.toString()].includes(action.type)) {
+        if (
+          UPDATE.toString() === action.type &&
+          !this.browserStorageService.initialStateLoaded
+        ) {
+          const newState = reducer(state, action);
           return {
             ...newState,
             ...this.browserStorageService.loadInitialState(),
           };
         }
-        return newState;
+        return state;
       };
     };
   }

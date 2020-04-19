@@ -12,6 +12,8 @@ const STATE_PREFIX = 'app-state';
 export class BrowserStorageService {
   private storage: Storage;
 
+  initialStateLoaded: boolean;
+
   constructor(
     @Inject(_NBSS_BROWSER_STORAGE) storage: Optional<BrowserStorage>,
     @Inject(_NBSS_FEATURE_NAME) private feature: Optional<string>
@@ -23,6 +25,7 @@ export class BrowserStorageService {
     const key = this.getStorageKey(this.feature);
     const item = this.storage.getItem(key);
     if (item) {
+      this.initialStateLoaded = true;
       return JSON.parse(item);
     }
 

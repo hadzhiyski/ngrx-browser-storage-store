@@ -2,7 +2,11 @@ import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs';
-import { addTodo } from '../../store/actions/todo.actions';
+import {
+  addTodo,
+  setCompleted,
+  removeTodo,
+} from '../../store/actions/todo.actions';
 import { ITodo } from '../../store/models/todo.interfaces';
 import { ITodoState } from '../../store/reducers/todo.reducer';
 import { selectAllTodos } from '../../store/selectors/todo.selectors';
@@ -36,5 +40,13 @@ export class TodoIndexComponent {
         this.store.dispatch(addTodo({ todo: result }));
       }
     });
+  }
+
+  toggleTodoCompleted(id: number, completed: boolean): void {
+    this.store.dispatch(setCompleted({ id, completed: !completed }));
+  }
+
+  deleteTodo(id: number): void {
+    this.store.dispatch(removeTodo({ id }));
   }
 }

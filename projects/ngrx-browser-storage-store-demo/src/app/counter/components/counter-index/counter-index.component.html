@@ -7,14 +7,10 @@
   </mat-card-content>
   <mat-card-actions>
     <button mat-icon-button (click)="add()">
-      <span class="material-icons">
-        add
-      </span>
+      <fa-icon [icon]="['fas', 'plus']"></fa-icon>
     </button>
     <button mat-icon-button (click)="subtract()">
-      <span class="material-icons">
-        remove
-      </span>
+      <fa-icon [icon]="['fas', 'minus']"></fa-icon>
     </button>
   </mat-card-actions>
 </mat-card>

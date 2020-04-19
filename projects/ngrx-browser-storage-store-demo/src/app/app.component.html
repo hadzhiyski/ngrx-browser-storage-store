@@ -6,13 +6,33 @@
     [attr.role]="(isHandset$ | async) ? 'dialog' : 'navigation'"
     [mode]="(isHandset$ | async) ? 'over' : 'push'"
   >
-    <mat-toolbar>Menu</mat-toolbar>
+    <mat-toolbar>
+      <div class="social">
+        <a
+          class="social-link github"
+          href="https://github.com/hadzhiyski/ngrx-browser-storage-store"
+          target="_blank"
+        >
+          <fa-icon [icon]="['fab', 'github']" size="2x"></fa-icon>
+        </a>
+        <a
+          class="social-link npm"
+          href="https://www.npmjs.com/package/ngrx-browser-storage-store"
+          target="_blank"
+        >
+          <fa-icon [icon]="['fab', 'npm']" size="2x"></fa-icon>
+        </a>
+      </div>
+    </mat-toolbar>
     <mat-nav-list>
       <a mat-list-item [routerLink]="'/docs'" routerLinkActive="active">Docs</a>
       <mat-divider></mat-divider>
-      <a mat-list-item [routerLink]="'/counter'" routerLinkActive="active">Counter</a>
+      <a mat-list-item [routerLink]="'/counter'" routerLinkActive="active"
+        >Counter</a
+      >
       <a mat-list-item [routerLink]="'/todo'" routerLinkActive="active">Todo</a>
     </mat-nav-list>
+    <div class="author-info"></div>
   </mat-sidenav>
   <mat-sidenav-content>
     <mat-toolbar color="primary">

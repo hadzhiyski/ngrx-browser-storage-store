@@ -7,20 +7,7 @@ Persist ngrx state to localStorage / sessionStrage
   npm i ngrx-browser-storage-store
 ```
 
-## Dependencies
-  - [@angular/core@9.1.1](https://www.npmjs.com/package/@angular/core/v/9.1.1)
-  - [@ngrx/store@9.1.0](https://www.npmjs.com/package/@ngrx/store/v/9.1.0)
-  - [@ngrx/effects@9.1.0](https://www.npmjs.com/package/@ngrx/effects/v/9.1.0)
-  - [rxjs@6.5.4](https://www.npmjs.com/package/rxjs/v/6.5.4)
-
-## Build
-There are a few warnings during build. These will be removed in the next Angular release. [Click](https://github.com/angular/angular/pull/36525)
-```
-WARNING in The basePath "D:/Projects/ngrx-browser-storage-store/dist/ngrx-browser-storage-store/ngrx-browser-storage-store" computed from baseUrl "D:/Projects/ngrx-browser-storage-store" and path mapping "dist/ngrx-browser-storage-store/ngrx-browser-storage-store" does not exist in the file-system.
-It will not be scanned for entry-points.
-```
-
-### Build Source
+## Build Source
 ``` cli
   npm install
   ng build --project ngrx-browser-storage-store

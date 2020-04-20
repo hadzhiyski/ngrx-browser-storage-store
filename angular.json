@@ -166,7 +166,12 @@
         },
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
-          "options": {}
+          "options": {
+            "repo": "https://github.com/hadzhiyski/ngrx-browser-storage-store.git",
+            "name": "hadzhiyski",
+            "email": "vladislav.hadzhiyski@gmail.com",
+            "baseHref": "/ngrx-browser-storage-store/"
+          }
         }
       }
     }

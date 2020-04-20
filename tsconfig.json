@@ -20,7 +20,6 @@
     ],
     "paths": {
       "ngrx-browser-storage-store": [
-        "dist/ngrx-browser-storage-store/ngrx-browser-storage-store",
         "dist/ngrx-browser-storage-store"
       ]
     }

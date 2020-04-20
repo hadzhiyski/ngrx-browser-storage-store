@@ -24,25 +24,6 @@ header .title:hover {
         top: 0;
         z-index: 1;
       }
-
-      .social {
-        width: 100%;
-        display: flex;
-        flex-direction: row;
-        justify-content: space-evenly;
-
-        &-link {
-          text-decoration: none;
-
-          &.github {
-            color: #000;
-          }
-
-          &.npm {
-            color: #cc3534;
-          }
-        }
-      }
     }
   }
 
@@ -64,4 +45,12 @@ header .title:hover {
   width: 100%;
   height: 100%;
   margin-top: 2em;
+}
+
+footer {
+  min-height: 3em;
+  .footer-row {
+    display: flex;
+    justify-content: center;
+  }
 }

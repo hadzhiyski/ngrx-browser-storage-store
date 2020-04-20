@@ -1,10 +1,14 @@
 {
   "name": "ngrx-browser-storage-store",
   "description": "Persist ngrx state to localStorage / sessionStrage",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "license": "Apache-2.0",
   "keywords": [
     "ngrx",
+    "store",
+    "local storage",
+    "session storage",
+    "storage",
     "localStorage",
     "sessionStorage",
     "angular"
@@ -18,7 +22,6 @@
     "url": "https://github.com/hadzhiyski"
   },
   "peerDependencies": {
-    "@angular/common": "^9.1.1",
     "@angular/core": "^9.1.1",
     "@ngrx/store": "^9.1.0",
     "@ngrx/effects": "^9.1.0",

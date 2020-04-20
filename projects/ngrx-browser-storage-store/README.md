@@ -9,6 +9,9 @@ Persist ngrx state to localStorage / sessionStrage
 
 ## Getting Started
 
+[Docs](https://hadzhiyski.github.io/ngrx-browser-storage-store/docs/)
+[Demo](https://hadzhiyski.github.io/ngrx-browser-storage-store)
+
 ### Import BrowserStorageModule
 
 #### For Root

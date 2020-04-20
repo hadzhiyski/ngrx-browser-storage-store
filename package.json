@@ -8,12 +8,12 @@
     "demo:start": "ng serve",
     "demo:build": "ng build --project ngrx-browser-storage-store-demo",
     "demo:build:prod": "ng build --project ngrx-browser-storage-store-demo",
+    "demo:deploy": "ng deploy & gh-pages --dist ./dist/ngrx-browser-storage-store-docs --dest ./docs --add --message \"Docs Update\" --repo https://github.com/hadzhiyski/ngrx-browser-storage-store.git",
     "lib:build": "ng build --project ngrx-browser-storage-store",
     "lib:build:prod": "ng build --prod --project ngrx-browser-storage-store",
     "lib:test": "ng test --watch false --project ngrx-browser-storage-store --browsers ChromeHeadless",
     "lib:test:watch": "ng test false --project ngrx-browser-storage-store",
-    "lib:docs": "npm run lib:test & cd projects/ngrx-browser-storage-store & npm run compodoc & cd ..\\..\\",
-    "lib:docs:deploy": "gh-pages --dist ./dist/ngrx-browser-storage-store-docs --dest ./docs --add --message \"Docs Update\" --repo https://github.com/hadzhiyski/ngrx-browser-storage-store.git"
+    "lib:docs": "npm run lib:test & cd projects/ngrx-browser-storage-store & npm run compodoc & cd ..\\..\\"
   },
   "private": true,
   "dependencies": {

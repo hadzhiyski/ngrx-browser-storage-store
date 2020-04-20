@@ -9,17 +9,17 @@ export class BrowserStorageMetaReducerLoader {
   get<TState>(): MetaReducer<TState, Action> {
     return (reducer: ActionReducer<TState>): ActionReducer<TState> => {
       return (state, action) => {
+        const newState = reducer(state, action);
         if (
           UPDATE.toString() === action.type &&
           !this.browserStorageService.initialStateLoaded
         ) {
-          const newState = reducer(state, action);
           return {
             ...newState,
             ...this.browserStorageService.loadInitialState(),
           };
         }
-        return state;
+        return newState;
       };
     };
   }

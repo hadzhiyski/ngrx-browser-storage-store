@@ -6,10 +6,9 @@ import {
 import { Optional } from './helpers';
 import { _NBSS_BROWSER_STORAGE, _NBSS_FEATURE_NAME } from './tokens';
 
-const STATE_PREFIX = 'app-state';
-
 @Injectable()
 export class BrowserStorageService {
+  private readonly STATE_PREFIX = 'app-state';
   private storage: Storage;
 
   initialStateLoaded = false;
@@ -42,10 +41,10 @@ export class BrowserStorageService {
 
   private getStorageKey(feature: Optional<string>): string {
     if (feature) {
-      return `${STATE_PREFIX}-${feature}`;
+      return `${this.STATE_PREFIX}-${feature}`;
     }
 
-    return STATE_PREFIX;
+    return this.STATE_PREFIX;
   }
 
   private getStorage(configStorage: Optional<BrowserStorage>): Storage {

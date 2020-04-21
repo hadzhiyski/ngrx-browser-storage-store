@@ -1,9 +1,5 @@
+import { BrowserStorage } from './browser-storage.config';
 import { BrowserStorageService } from './browser-storage.service';
-import {
-  BrowserStorage,
-  NBSS_DEFAULT_BROWSER_STORAGE,
-} from './browser-storage.config';
-import { Optional } from './helpers';
 
 describe('BrowserStorageService', () => {
   it('should be created with parameters default values', () => {
@@ -222,7 +218,9 @@ describe('BrowserStorageService', () => {
         test.cfg.storage,
         test.cfg.feature
       );
-      expect(() => service.set(test.data)).toThrowError('Value can not be falsy.');
+      expect(() => service.set(test.data)).toThrowError(
+        'Value can not be falsy.'
+      );
     });
   });
 });

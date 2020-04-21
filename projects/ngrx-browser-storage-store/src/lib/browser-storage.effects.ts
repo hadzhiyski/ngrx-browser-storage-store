@@ -1,14 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, CreateEffectMetadata } from '@ngrx/effects';
-import {
-  Action,
-  DefaultProjectorFn,
-  MemoizedSelector,
-  select,
-  Store,
-} from '@ngrx/store';
+import { select, Store } from '@ngrx/store';
+import { Props } from '@ngrx/store/src/models';
 import { Observable } from 'rxjs';
-import { tap, withLatestFrom } from 'rxjs/operators';
+import { map, tap, withLatestFrom } from 'rxjs/operators';
 import { BrowserStorageService } from './browser-storage.service';
 
 @Injectable()
@@ -20,30 +15,27 @@ export class BrowserStorageEffects<TState> {
 
   saveForFeature(
     actions$: Actions,
-    featureSelector: MemoizedSelector<
-      TState,
-      TState,
-      DefaultProjectorFn<TState>
-    >
-  ): Observable<[Action, TState]> & CreateEffectMetadata {
+    featureSelector: (state: TState, props: Props<TState>) => TState,
+    props?: Props<TState>
+  ): Observable<TState> & CreateEffectMetadata {
     return createEffect(
       () =>
         actions$.pipe(
-          withLatestFrom(this.store.pipe(select(featureSelector))),
-          tap(([action, state]) => this.browserStorageService.set(state))
+          withLatestFrom(this.store.pipe(select(featureSelector, props))),
+          map(([action, state]) => state),
+          tap((state) => this.browserStorageService.set(state))
         ),
       { dispatch: false }
     );
   }
 
-  saveForRoot(
-    actions$: Actions
-  ): Observable<[Action, TState]> & CreateEffectMetadata {
+  saveForRoot(actions$: Actions): Observable<TState> & CreateEffectMetadata {
     return createEffect(
       () =>
         actions$.pipe(
           withLatestFrom(this.store),
-          tap(([action, state]) => this.browserStorageService.set(state))
+          map(([action, state]) => state),
+          tap((state) => this.browserStorageService.set(state))
         ),
       { dispatch: false }
     );

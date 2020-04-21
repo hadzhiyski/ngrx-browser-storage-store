@@ -1,13 +1,13 @@
-import { Observable, of } from 'rxjs';
-import { Action, createFeatureSelector, createSelector } from '@ngrx/store';
-import { BrowserStorageEffects } from './browser-storage.effects';
 import { TestBed } from '@angular/core/testing';
-import { provideMockStore } from '@ngrx/store/testing';
-import { provideMockActions } from '@ngrx/effects/testing';
-import { BrowserStorageService } from './browser-storage.service';
-import { _NBSS_FEATURE_NAME, _NBSS_BROWSER_STORAGE } from './tokens';
-import { BrowserStorage } from './browser-storage.config';
 import { Actions } from '@ngrx/effects';
+import { provideMockActions } from '@ngrx/effects/testing';
+import { createFeatureSelector } from '@ngrx/store';
+import { provideMockStore } from '@ngrx/store/testing';
+import { of } from 'rxjs';
+import { BrowserStorage } from './browser-storage.config';
+import { BrowserStorageEffects } from './browser-storage.effects';
+import { BrowserStorageService } from './browser-storage.service';
+import { _NBSS_BROWSER_STORAGE, _NBSS_FEATURE_NAME } from './tokens';
 
 interface IState {
   count: number;
@@ -19,9 +19,15 @@ describe('BrowserStorageEffects', () => {
     { cfg: { storage: BrowserStorage.SessionStorage, feature: 'test42' } },
   ].map((test) => {
     it(`should save state to storage for feature Storage: ${test.cfg.storage}`, () => {
-      const actions = [{ type: 'test action' }, {type: 'test 2'}, {type: 'test 3'}];
+      const actions = [
+        { type: 'test action' },
+        { type: 'test 2' },
+        { type: 'test 3' },
+      ];
       const actions$ = of(...actions);
-      const selectStateSelector = createFeatureSelector<IState>(test.cfg.feature);
+      const selectStateSelector = createFeatureSelector<IState>(
+        test.cfg.feature
+      );
       const latestState: IState = {
         count: 100,
       };
@@ -76,7 +82,11 @@ describe('BrowserStorageEffects', () => {
     { cfg: { storage: BrowserStorage.SessionStorage } },
   ].map((test) => {
     it(`should save state to storage for root Storage: ${test.cfg.storage}`, () => {
-      const actions = [{ type: 'test action' }, {type: 'test 2'}, {type: 'test 3'}];
+      const actions = [
+        { type: 'test action' },
+        { type: 'test 2' },
+        { type: 'test 3' },
+      ];
       const actions$ = of(...actions);
       const latestState: IState = {
         count: 100,
@@ -110,9 +120,7 @@ describe('BrowserStorageEffects', () => {
         'set'
       );
 
-      effects
-        .saveForRoot(new Actions(actions$))
-        .subscribe();
+      effects.saveForRoot(new Actions(actions$)).subscribe();
 
       expect(storageServiceSpy).toHaveBeenCalledTimes(actions.length);
       expect(storageServiceSpy).toHaveBeenCalledWith(latestState);

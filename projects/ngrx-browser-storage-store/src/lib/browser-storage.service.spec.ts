@@ -24,7 +24,6 @@ describe('BrowserStorageService', () => {
       const key = `app-state${test.feature ? `-${test.feature}` : ''}`;
 
       expect(getItemSpy).toHaveBeenCalledWith(key);
-      expect(service.initialStateLoaded).toBeFalse();
       expect(state).toEqual({});
     });
   });
@@ -54,7 +53,6 @@ describe('BrowserStorageService', () => {
       const key = 'app-state';
 
       expect(getItemSpy).toHaveBeenCalledWith(key);
-      expect(service.initialStateLoaded).toBeFalse();
       expect(state).toEqual({});
     });
   });
@@ -102,7 +100,6 @@ describe('BrowserStorageService', () => {
       expect(getItemSpy).toHaveBeenCalledWith(test.key);
       expect(parseSpy).toHaveBeenCalledTimes(1);
       expect(state).toEqual(JSON.parse(test.data));
-      expect(service.initialStateLoaded).toBeTrue();
     });
   });
 

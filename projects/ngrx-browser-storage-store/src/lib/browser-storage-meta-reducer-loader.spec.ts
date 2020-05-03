@@ -28,7 +28,7 @@ describe('BrowserStorageMetaReducerLoader', () => {
       storage: sessionStorage,
     },
   ].map((test) => {
-    it(`should load from storage on ngrx/INIT once Storage: ${
+    it(`should load from storage on ngrx/INIT or ngrx/UPDATE Storage: ${
       test.cfg.storage
     } Feature: ${test.cfg.feature || 'undefined'}`, () => {
       const addAction = createAction('[Counter] Add');
@@ -77,7 +77,7 @@ describe('BrowserStorageMetaReducerLoader', () => {
       meta(undefined, { type: INIT });
       meta(undefined, { type: UPDATE });
 
-      expect(loadInitialStateSpy).toHaveBeenCalledTimes(2);
+      expect(loadInitialStateSpy).toHaveBeenCalledTimes(4);
     });
   });
 
@@ -146,7 +146,7 @@ describe('BrowserStorageMetaReducerLoader', () => {
       meta(undefined, { type: INIT });
       meta(undefined, { type: UPDATE });
 
-      expect(loadInitialStateSpy).toHaveBeenCalledTimes(1);
+      expect(loadInitialStateSpy).toHaveBeenCalledTimes(2);
 
       let newState = meta({ count: 1 }, addAction);
       expect(newState.count).toBe(2);
